@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+	<head>
+		<meta charset="utf-8">
+		<script type="text/javascript" src="https://cdn.firebase.com/js/client/2.2.1/firebase.js">
+		</script>
+		<script src='https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js'>
+		</script>
+		<style type="text/css">
+			body{
+				color: #111111;
+				background-color: white;
+			}
+		</style>
+	</head>
+	<body>
+		<div id='messagesDiv'></div>
+		<script type="text/javascript">
+			var myDataRef = new Firebase('https://incandescent-inferno-4828.firebaseio.com/');
+
+			
+
+		    myDataRef.on('child_added', function(snapshot) {
+				var info = snapshot.val();
+				displayChatMessage(info.name, info.organization, info.contact);
+			});
+
+			function displayChatMessage(name, organization, contact) {
+	        	$('<div/>').text(organization + ', ' + contact).prepend($('<em/>').text(name + ': ')).appendTo($('#messagesDiv'));
+	        	$('#messagesDiv')[0].scrollTop = $('#messagesDiv')[0].scrollHeight;
+	      	};
+
+		</script>
+	</body>

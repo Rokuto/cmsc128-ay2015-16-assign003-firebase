@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+		<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+
+		<script type="text/javascript" src="https://cdn.firebase.com/js/client/2.2.1/firebase.js">
+		</script>
+		<script src='https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js'>
+		</script>
+		
+		<style type="text/css">
+		body{
+			background-image: url("http://ayay.co.uk/backgrounds/anime/neon_genesis_evangelion/school-days.jpg"); 
+			background-repeat: no-repeat;
+			background-size: cover;
+			background-position: center;
+		}
+		iframe{
+			width: 65%;
+			height: 450px;
+		}
+		</style>
+
+	</head>
+	
+	<body>
+		<div class="container">
+			<h2>Event Guest Attendance</h2>
+			<div>
+				<iframe src="data.html"></iframe>
+			</div>
+			<div>
+				<input type='text' id='nameInput' placeholder='Name'>
+    			<input type='text' id='contactInput' placeholder='Contact Number'>
+    			<input type='text' id='organizationInput' placeholder='Organization'>
+			</div>
+		</div>
+		
+		<script type="text/javascript">
+			var myDataRef = new Firebase('https://incandescent-inferno-4828.firebaseio.com/');
+
+			$('#organizationInput').keypress(function (e) {
+		    	if (e.keyCode == 13) {
+		        	var name = $('#nameInput').val();
+		          	var organization = $('#organizationInput').val();
+		          	var contact = $('#contactInput').val();
+		          	myDataRef.push({name: name, organization: organization, contact: contact});
+		          	$('#organizationInput').val('');
+		          	$('#contactInput').val('');
+		          	$('#nameInput').val('');
+		        }
+		    });
+
+		</script>
+	
+	</body>
